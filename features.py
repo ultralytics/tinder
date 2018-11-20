@@ -20,8 +20,8 @@ def get_match_info():
     now = datetime.utcnow()
     match_info = {}
     n = len(matches)
-    print('\nDownloading match info...')
-    for i, match in tqdm(enumerate(matches[:n])):
+    print('\nDownloading match info...', end='')
+    for i, match in enumerate(matches[:n]):
 
         try:
             person = match['person']
@@ -47,6 +47,7 @@ def get_match_info():
             message = template.format(type(ex).__name__, ex.args)
             print(message)
             # continue
+    print(' %g matches... Done.' % n)
     return match_info
 
 

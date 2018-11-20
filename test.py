@@ -28,7 +28,7 @@ for index, p in enumerate(myself['photos']):
 # Get your matches
 match_info = features.get_match_info()
 
-download_match_images = False
+download_match_images = True
 # Download all match images
 if download_match_images:
     print('\nDownloading match images...')
