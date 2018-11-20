@@ -1,12 +1,12 @@
 # coding=utf-8
 
 from datetime import date, datetime
-from random import random
 from time import sleep
 
 import config
 import tinder_api as api
-
+import random
+from tqdm import tqdm
 
 '''
 This file collects important data on your matches,
@@ -15,16 +15,22 @@ gender, message count, and their average successRate.
 '''
 
 
+# @profile
 def get_match_info():
     matches = api.get_updates()['matches']
     now = datetime.utcnow()
     match_info = {}
-    for match in matches[:len(matches)]:
+    n = len(matches)
+    for i, match in tqdm(enumerate(matches[:n])):
+
         try:
             person = match['person']
-            person_id = person['_id']  # This ID for looking up person
-            match_info[person_id] = {
+            if 'bio' not in person:
+                person['bio'] = ''
+
+            match_info[i] = {
                 "name": person['name'],
+                "person_id": person['_id'],  # This ID for looking up person
                 "match_id": match['id'],  # This ID for messaging
                 "message_count": match['message_count'],
                 "photos": get_photos(person),
@@ -33,7 +39,7 @@ def get_match_info():
                 "avg_successRate": get_avg_successRate(person),
                 "messages": match['messages'],
                 "age": calculate_age(match['person']['birth_date']),
-                "distance": api.get_person(person_id)['results']['distance_mi'],
+                "distance": 0,  # api.get_person(person_id)['results']['distance_mi'], # very slow
                 "last_activity_date": match['last_activity_date'],
             }
         except Exception as ex:
@@ -156,9 +162,10 @@ def pause():
     realistic amount of time between actions to not make Tinder...
     suspicious!
     '''
-    nap_length = 3 * random()
+    nap_length = 3 * random.random()
     print('Napping for %f seconds...' % nap_length)
     sleep(nap_length)
+
 
 if __name__ == '__main__':
     if api.authverif() == True:
