@@ -17,9 +17,8 @@ fb_user_id = tinder_api.config.fb_user_id
 
 tinder_api.get_auth_token(fb_access_token, fb_user_id)
 
-print(
-    fb_access_token)  # EAAGm0PX4ZCpsBAFHI3XAD6BZChZCqcXrBPFAd4URm777g2UCLNDxNtWqiNAPBkSLCzEiWe9kEYZAXqQz0cHS1UqUVO9WF7IJ4RGzncc2L1bVsiUlL4TPteSEN5iCQ22w458pjvD2q8ffgML38FEvp5HLlOqxsql8BUnvuQOPpRIWD3WgKUMPfEVXGB9uNXy4LtflCXjxCAMZA34LxI40xI0UBukANKJ4ZD
-print(fb_user_id)  # 559217135
+print(fb_access_token)
+print(fb_user_id)
 
 myself = tinder_api.get_self()
 for p in myself['photos']:
