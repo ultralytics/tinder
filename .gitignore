@@ -6,5 +6,5 @@ __pycache__
 find.py
 *.log
 *.jpg
-data
+data*
 .idea

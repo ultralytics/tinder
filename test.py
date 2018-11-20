@@ -1,25 +1,15 @@
 import tinder_api
-import fb_auth_token
 import features
 import os
+from tqdm import tqdm
 
 host = 'https://api.gotinder.com'  # thanks to this line you do not need to import config.py or tinder_config_ex.py
 
-# Enter your facebook email
-fb_username = 'glenn.jocher@gmail.com'
-# Enter your facebook password
-fb_password = ''
-
-# fb_access_token = fb_auth_token.get_fb_access_token(fb_username, fb_password)
-# fb_user_id = fb_auth_token.get_fb_id(fb_access_token)
 fb_access_token = tinder_api.config.fb_access_token
 fb_user_id = tinder_api.config.fb_user_id
-
 tinder_api.get_auth_token(fb_access_token, fb_user_id)
 
-print(fb_access_token)
-print(fb_user_id)
-
+print('\nYour profile photos:')
 myself = tinder_api.get_self()
 for p in myself['photos']:
     print(p['url'])
@@ -27,17 +17,17 @@ for p in myself['photos']:
 # Get your matches
 match_info = features.get_match_info()
 
-download_matches = True
+download_match_images = True
 # Download all match images
-if download_matches:
+if download_match_images:
+    print('\nDownloading match images...')
     os.system('rm -rf data && mkdir data')
-    for i in range(len(match_info)):
+    for i in tqdm(range(len(match_info))):
         name = match_info[i]['name']
         photos = match_info[i]['photos']
         for j, photo in enumerate(photos):
             label = name + '_m' + str(i) + '_' + str(j)
-            os.system('wget ' + photo + ' -O data/' + label + '.jpg')
-            print(photos[j])
+            os.system('wget ' + photo + ' -q -O data/' + label + '.jpg')
 
 exit()
 

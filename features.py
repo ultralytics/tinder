@@ -15,12 +15,12 @@ gender, message count, and their average successRate.
 '''
 
 
-# @profile
 def get_match_info():
     matches = api.get_updates()['matches']
     now = datetime.utcnow()
     match_info = {}
     n = len(matches)
+    print('\nDownloading match info...')
     for i, match in tqdm(enumerate(matches[:n])):
 
         try:
@@ -47,7 +47,6 @@ def get_match_info():
             message = template.format(type(ex).__name__, ex.args)
             print(message)
             # continue
-    print("All data stored in variable: match_info")
     return match_info
 
 
