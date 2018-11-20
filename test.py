@@ -27,16 +27,19 @@ for p in myself['photos']:
 # Get your matches
 match_info = features.get_match_info()
 
-# # Download all match images
-# os.system('rm -rf data && mkdir data')
-# for i in range(len(match_info)):
-#     name = match_info[i]['name']
-#     photos = match_info[i]['photos']
-#     for j, photo in enumerate(photos):
-#         label = name + '_m' + str(i) + '_' + str(j)
-#         os.system('wget ' + photo + ' -O data/' + label + '.jpg')
-#         print(photos[j])
+download_matches = True
+# Download all match images
+if download_matches:
+    os.system('rm -rf data && mkdir data')
+    for i in range(len(match_info)):
+        name = match_info[i]['name']
+        photos = match_info[i]['photos']
+        for j, photo in enumerate(photos):
+            label = name + '_m' + str(i) + '_' + str(j)
+            os.system('wget ' + photo + ' -O data/' + label + '.jpg')
+            print(photos[j])
 
+exit()
 
 # Get Tinder Recommendations of people around you
 # recommendations = tinder_api.get_recommendations()
@@ -55,4 +58,3 @@ testperson
 
 # message a match
 tinder_api.send_msg('59ff7c30117d37c0572338d55a10ae3c8802dc4401463712', 'Hi, boy! Gloria Tinder-Robot here')
-
