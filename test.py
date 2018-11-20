@@ -1,23 +1,34 @@
-import tinder_api
-import features
 import os
+
+import matplotlib.pyplot as plt
+from skimage import io
 from tqdm import tqdm
 
-host = 'https://api.gotinder.com'  # thanks to this line you do not need to import config.py or tinder_config_ex.py
+import features
+import tinder_api
 
+# Get tokens
+host = 'https://api.gotinder.com'  # thanks to this line you do not need to import config.py or tinder_config_ex.py
 fb_access_token = tinder_api.config.fb_access_token
 fb_user_id = tinder_api.config.fb_user_id
 tinder_api.get_auth_token(fb_access_token, fb_user_id)
 
+# Get your profile photos
+plotFlag = True
 print('\nYour profile photos:')
 myself = tinder_api.get_self()
-for p in myself['photos']:
+for index, p in enumerate(myself['photos']):
     print(p['url'])
+    img = io.imread(p['url'])[:, :, ::-1]
+    if plotFlag:
+        plt.figure(figsize=(12, 12)) if index == 0 else None
+        plt.subplot(3, 3, index + 1).imshow(img[:, :, ::-1])
+        plt.axis('off')
 
 # Get your matches
 match_info = features.get_match_info()
 
-download_match_images = True
+download_match_images = False
 # Download all match images
 if download_match_images:
     print('\nDownloading match images...')
