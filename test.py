@@ -1,4 +1,5 @@
 import os
+import sys
 
 import matplotlib.pyplot as plt
 from skimage import io
@@ -13,14 +14,19 @@ fb_access_token = tinder_api.config.fb_access_token
 fb_user_id = tinder_api.config.fb_user_id
 tinder_api.get_auth_token(fb_access_token, fb_user_id)
 
+# Create user directory
+user_dir = 'data/' + features.config.fb_username.split('@')[0] + '/'
+os.system('rm -rf ' + user_dir + ' && mkdir ' + user_dir)
+print('\nCreated User Directory: ' + user_dir)
+
 # Get your profile photos
-plotFlag = True
+plotFlag = False
 print('\nYour profile photos:')
 myself = tinder_api.get_self()
 for index, p in enumerate(myself['photos']):
     print(p['url'])
-    img = io.imread(p['url'])[:, :, ::-1]
     if plotFlag:
+        img = io.imread(p['url'])[:, :, ::-1]
         plt.figure(figsize=(12, 12)) if index == 0 else None
         plt.subplot(3, 3, index + 1).imshow(img[:, :, ::-1])
         plt.axis('off')
@@ -28,17 +34,28 @@ for index, p in enumerate(myself['photos']):
 # Get your matches
 match_info = features.get_match_info()
 
-download_match_images = True
 # Download all match images
+download_match_images = True
 if download_match_images:
     print('\nDownloading match images...')
-    os.system('rm -rf data && mkdir data')
-    for i in tqdm(range(len(match_info))):
+    os.makedirs(user_dir + 'match_images')
+    n = 3  # len(match_info)
+    for i in tqdm(range(n)):
         name = match_info[i]['name']
         photos = match_info[i]['photos']
         for j, photo in enumerate(photos):
             label = name + '_m' + str(i) + '_' + str(j)
-            os.system('wget ' + photo + ' -q -O data/' + label + '.jpg')
+            os.system('wget ' + photo + ' -q -O ' + user_dir + 'match_images/' + label + '.jpg')
+
+    # Pass images through yolov3
+    print('\nAnalyzing match images with YOLOv3...')
+    sys.path.append('../yolov3')
+    import detect as detect
+
+    detect.opt.conf_thres = 0.60
+    detect.opt.image_folder = sys.path[0] + '/' + user_dir + 'match_images'
+    detect.opt.output_folder = sys.path[0] + '/' + user_dir + 'match_images_processed'
+    detect.main(detect.opt)
 
 exit()
 
