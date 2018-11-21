@@ -38,14 +38,16 @@ match_info = features.get_match_info()
 download_match_images = True
 if download_match_images:
     print('\nDownloading match images...')
+    match_dir = user_dir + 'match_images/'
+    processed_dir = user_dir + 'match_images_processed/'
     os.makedirs(user_dir + 'match_images')
-    n = 3  # len(match_info)
+    n = 5  # len(match_info)
     for i in tqdm(range(n)):
         name = match_info[i]['name']
         photos = match_info[i]['photos']
         for j, photo in enumerate(photos):
             label = name + '_m' + str(i) + '_' + str(j)
-            os.system('wget ' + photo + ' -q -O ' + user_dir + 'match_images/' + label + '.jpg')
+            os.system('wget ' + photo + ' -q -O ' + match_dir + label + '.jpg')
 
     # Pass images through yolov3
     print('\nAnalyzing match images with YOLOv3...')
@@ -53,10 +55,12 @@ if download_match_images:
     import detect as detect
 
     detect.opt.conf_thres = 0.60
-    detect.opt.image_folder = sys.path[0] + '/' + user_dir + 'match_images'
-    detect.opt.output_folder = sys.path[0] + '/' + user_dir + 'match_images_processed'
-    detect.opt.txt_out = False
+    detect.opt.image_folder = sys.path[0] + '/' + match_dir
+    detect.opt.output_folder = sys.path[0] + '/' + processed_dir
+    detect.opt.txt_out = True
     detect.main(detect.opt)
+
+    # Remove images of none or multiple people
 
 exit()
 
