@@ -55,6 +55,7 @@ if download_match_images:
     detect.opt.conf_thres = 0.60
     detect.opt.image_folder = sys.path[0] + '/' + user_dir + 'match_images'
     detect.opt.output_folder = sys.path[0] + '/' + user_dir + 'match_images_processed'
+    detect.opt.txt_out = False
     detect.main(detect.opt)
 
 exit()
