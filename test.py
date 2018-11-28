@@ -1,7 +1,10 @@
+import glob
 import os
 import sys
 
+import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 from skimage import io
 from tqdm import tqdm
 
@@ -37,10 +40,15 @@ match_info = features.get_match_info()
 # Download all match images
 download_match_images = True
 if download_match_images:
+
     print('\nDownloading match images...')
     match_dir = user_dir + 'match_images/'
-    processed_dir = user_dir + 'match_images_processed/'
-    os.makedirs(user_dir + 'match_images')
+    yolo_dir = user_dir + 'match_images_yolo/'
+    crop_dir = user_dir + 'match_images_crop/'
+
+    os.makedirs(match_dir)
+    os.makedirs(crop_dir)
+
     n = 5  # len(match_info)
     for i in tqdm(range(n)):
         name = match_info[i]['name']
@@ -56,11 +64,25 @@ if download_match_images:
 
     detect.opt.conf_thres = 0.60
     detect.opt.image_folder = sys.path[0] + '/' + match_dir
-    detect.opt.output_folder = sys.path[0] + '/' + processed_dir
+    detect.opt.output_folder = sys.path[0] + '/' + yolo_dir
     detect.opt.txt_out = True
     detect.main(detect.opt)
 
     # Remove images of none or multiple people
+    txt_files = sorted(glob.glob('%s/*.txt' % yolo_dir))
+    for txt_file in txt_files:
+        labels = np.loadtxt(txt_file, dtype=np.float32).reshape(-1, 6)
+        labels = labels[labels[:, 4] == 0]
+
+        if labels.shape[0] == 1:  # if only 1 person in image
+            img_name = txt_file[:-4].split('/')[-1]
+            box = labels[0].astype('int')
+            h, w = box[3] - box[1], box[2] - box[0]
+            area = w * h
+
+            if (w > 150) and (h > 150) and (area > 30e3):
+                img = cv2.imread(match_dir + img_name)
+                cv2.imwrite(crop_dir + img_name, img[box[1]:box[3], box[0]:box[2]])
 
 exit()
 
