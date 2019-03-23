@@ -1,0 +1,8 @@
+# pip3 install -U -r requirements.txt
+# conda install numpy opencv matplotlib skimage tqdm && conda install -c conda-forge robobrowser
+cv2
+matplotlib
+numpy
+skimage
+tqdm
+robobrowser
