@@ -11,20 +11,20 @@ Please note that this documentation may become outdated over time; always refer 
 
 The following table summarizes the host and protocol details for the Tinder API.
 
-| Detail   | Value               |
-|----------|---------------------|
-| Host     | api.gotinder.com    |
-| Protocol | SSL                 |
+| Detail   | Value            |
+| -------- | ---------------- |
+| Host     | api.gotinder.com |
+| Protocol | SSL              |
 
 ## Required Headers
 
 When making API calls, it's essential to include appropriate headers. Here are the headers that you'll need:
 
-| Header         | Example                                                  |
-|----------------|----------------------------------------------------------|
-| X-Auth-Token   | See "How to get facebook_token" section below            |
-| Content-type   | application/json                                         |
-| User-agent     | Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)            |
+| Header       | Example                                       |
+| ------------ | --------------------------------------------- |
+| X-Auth-Token | See "How to get facebook_token" section below |
+| Content-type | application/json                              |
+| User-agent   | Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00) |
 
 ## Known Endpoints
 
@@ -32,17 +32,17 @@ All endpoints should be appended to the host URL, `https://api.gotinder.com`. Ma
 
 The table below lists various endpoints with their purposes, expected data, and the HTTP method to use.
 
-| Endpoint                                 | Purpose                                                  | Data                                                                            | Method |
-|------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------------------------|--------|
-| `/auth`                                  | For authenticating                                       | `{'facebook_token': <token>, 'facebook_id': <id>}`                              | POST   |
-| `/auth/login/accountkit`                 | For SMS authentication (two-factor)                      | `{'token': <token>, 'id': <id>, 'client_version':'9.0.1'}`                     | POST   |
-| ...                                      | ...                                                      | ...                                                                             | ...    |
-| `/passport/user/travel`                  | (Tinder Plus Only) Travel to coordinate                  | `{"lat": <latitude>, "lon": <longitude>}`                                      | POST   |
-| `/instagram/authorize`                   | Auth Instagram                                           | `{}`                                                                            | GET    |
-| ...                                      | ...                                                      | ...                                                                             | ...    |
-| `/v2/fast-match/preview`                 | Get the thumbnail image shown in the messages-window     | `{}`                                                                            | GET    |
-| `/giphy/trending?limit=<limit>`          | Get the trending GIFs (Tinder uses Giphy) in chat        | `{}`                                                                            | GET    |
-| `/giphy/search?limit=<limit>&query=<query>` | Get GIFs based on a search (Tinder uses Giphy) in chat | `{}`                                                                            | GET    |
+| Endpoint                                    | Purpose                                                | Data                                                       | Method |
+| ------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------- | ------ |
+| `/auth`                                     | For authenticating                                     | `{'facebook_token': <token>, 'facebook_id': <id>}`         | POST   |
+| `/auth/login/accountkit`                    | For SMS authentication (two-factor)                    | `{'token': <token>, 'id': <id>, 'client_version':'9.0.1'}` | POST   |
+| ...                                         | ...                                                    | ...                                                        | ...    |
+| `/passport/user/travel`                     | (Tinder Plus Only) Travel to coordinate                | `{"lat": <latitude>, "lon": <longitude>}`                  | POST   |
+| `/instagram/authorize`                      | Auth Instagram                                         | `{}`                                                       | GET    |
+| ...                                         | ...                                                    | ...                                                        | ...    |
+| `/v2/fast-match/preview`                    | Get the thumbnail image shown in the messages-window   | `{}`                                                       | GET    |
+| `/giphy/trending?limit=<limit>`             | Get the trending GIFs (Tinder uses Giphy) in chat      | `{}`                                                       | GET    |
+| `/giphy/search?limit=<limit>&query=<query>` | Get GIFs based on a search (Tinder uses Giphy) in chat | `{}`                                                       | GET    |
 
 (For the full list of endpoints, please refer to the attached table in the original documentation.)
 
@@ -50,13 +50,13 @@ The table below lists various endpoints with their purposes, expected data, and 
 
 Tinder API uses standard HTTP status codes to indicate the success or failure of an API request:
 
-| Status Code | Explanation                                                                                                                                 |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| 200         | Everything went okay, and the server returned a result (if any).                                                                             |
-| 301         | The server is redirecting you to a different endpoint. This can occur when a domain name changes or an endpoint's name is updated.            |
-| 400         | The server thinks you made a bad request. This happens when the request is missing information or is otherwise malformed.                     |
-| 401         | The server thinks you're not authenticated. This happens when incorrect credentials are provided.                                             |
-| 404         | The server didn't find the resource you tried to access.                                                                                     |
+| Status Code | Explanation                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| 200         | Everything went okay, and the server returned a result (if any).                                                                   |
+| 301         | The server is redirecting you to a different endpoint. This can occur when a domain name changes or an endpoint's name is updated. |
+| 400         | The server thinks you made a bad request. This happens when the request is missing information or is otherwise malformed.          |
+| 401         | The server thinks you're not authenticated. This happens when incorrect credentials are provided.                                  |
+| 404         | The server didn't find the resource you tried to access.                                                                           |
 
 ## Config File
 
@@ -108,6 +108,7 @@ This feature used to allow you to access profile information and ID of your Face
 We welcome contributions from the community! Whether you're fixing bugs, adding new features, or improving documentation, your input is invaluable. Take a look at our [Contributing Guide](https://docs.ultralytics.com/help/contributing) to get started. Also, we'd love to hear about your experience with Ultralytics products. Please consider filling out our [Survey](https://ultralytics.com/survey?utm_source=github&utm_medium=social&utm_campaign=Survey). A huge 🙏 and thank you to all of our contributors!
 
 <!-- Ultralytics contributors -->
+
 <a href="https://github.com/ultralytics/yolov5/graphs/contributors">
 <img width="100%" src="https://github.com/ultralytics/assets/raw/main/im/image-contributors.png" alt="Ultralytics open-source contributors"></a>
 
@@ -138,4 +139,3 @@ For bug reports, feature requests, and contributions, head to [GitHub Issues](ht
   <img src="https://github.com/ultralytics/assets/raw/main/social/logo-transparent.png" width="3%" alt="space">
   <a href="https://ultralytics.com/discord"><img src="https://github.com/ultralytics/assets/raw/main/social/logo-social-discord.png" width="3%" alt="Ultralytics Discord"></a>
 </div>
-
