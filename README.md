@@ -5,6 +5,8 @@
 
 A big thank you to [@rtt](https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md) for their initial compilation of the Tinder API documentation. This document is meant to offer an updated guide for interacting with the Tinder API as of June 2018.
 
+[![Ultralytics Actions](https://github.com/ultralytics/tinder/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/tinder/actions/workflows/format.yml)
+
 Please note that this documentation may become outdated over time; always refer to the latest API specifications when developing applications.
 
 ## API Details
