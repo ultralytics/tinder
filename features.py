@@ -1,12 +1,13 @@
 # coding=utf-8
 
+import random
 from datetime import date, datetime
 from time import sleep
 
 import config
-import tinder_api as api
-import random
 from tqdm import tqdm
+
+import tinder_api as api
 
 """
 This file collects important data on your matches,
