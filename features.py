@@ -5,8 +5,9 @@ from datetime import date, datetime
 from time import sleep
 
 import config
-import tinder_api as api
 from tqdm import tqdm
+
+import tinder_api as api
 
 """
 This file collects important data on your matches,
