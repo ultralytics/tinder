@@ -5,9 +5,8 @@ from datetime import date, datetime
 from time import sleep
 
 import config
-from tqdm import tqdm
-
 import tinder_api as api
+from tqdm import tqdm
 
 """
 This file collects important data on your matches,
@@ -54,22 +53,16 @@ def get_match_info():
 def get_match_id_by_name(name):
     """Returns a list_of_ids that have the same name as your input."""
     global match_info
-    list_of_ids = []
-    for match in match_info:
-        if match_info[match]["name"] == name:
-            list_of_ids.append(match_info[match]["match_id"])
-    if len(list_of_ids) > 0:
+    list_of_ids = [match_info[match]["match_id"] for match in match_info if match_info[match]["name"] == name]
+    if list_of_ids:
         return list_of_ids
-    return {"error": "No matches by name of %s" % name}
+    return {"error": f"No matches by name of {name}"}
 
 
 def get_photos(person):
     """Returns a list of photo urls."""
     photos = person["photos"]
-    photo_urls = []
-    for photo in photos:
-        photo_urls.append(photo["url"])
-    return photo_urls
+    return [photo["url"] for photo in photos]
 
 
 def calculate_age(birthday_string):
@@ -89,7 +82,7 @@ def get_avg_successRate(person):
         try:
             photo_successRate = photo["successRate"]
             curr_avg += photo_successRate
-        except:
+        except Exception:
             return -1
     return curr_avg / len(photos)
 
@@ -105,17 +98,11 @@ def sort_by_value(sortType):
 
 def see_friends_profiles(name=None):
     friends = api.see_friends()
-    if name == None:
+    if name is None:
         return friends
-    else:
-        result_dict = {}
-        name = name.title()  # upcases first character of each word
-        for friend in friends:
-            if name in friend["name"]:
-                result_dict[friend["name"]] = friend
-        if result_dict == {}:
-            return "No friends by that name"
-        return result_dict
+    name = name.title()  # upcases first character of each word
+    result_dict = {friend["name"]: friend for friend in friends if name in friend["name"]}
+    return result_dict or "No friends by that name"
 
 
 def convert_from_datetime(difference):
@@ -130,8 +117,7 @@ def get_last_activity_date(now, ping_time):
     ping_time = ping_time[: len(ping_time) - 5]
     datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S")
     difference = now - datetime_ping
-    since = convert_from_datetime(difference)
-    return since
+    return convert_from_datetime(difference)
 
 
 def how_long_has_it_been():

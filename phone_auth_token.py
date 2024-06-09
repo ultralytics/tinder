@@ -16,7 +16,7 @@ def sendCode(number):
     r = requests.post(URL, headers=HEADERS, verify=False)
     print(r.url)
     response = r.json()
-    if response.get("login_request_code") == None:
+    if response.get("login_request_code") is None:
         return False
     else:
         return response["login_request_code"]
@@ -37,7 +37,7 @@ def getToken(number, code, req_code):
     }
     r_GetToken = requests.post(TOKEN_URL, data=GetToken_content, headers=GetToken_headers, verify=False)
     token_response = r_GetToken.json()
-    if token_response["data"].get("api_token") == None:
+    if token_response["data"].get("api_token") is None:
         return token_response
     else:
         return token_response["data"]["api_token"]
@@ -46,4 +46,4 @@ def getToken(number, code, req_code):
 phone_number = input("Please enter your phone number under the international format (country code + number)")
 log_code = sendCode(phone_number)
 sms_code = input("Please enter the code you've received by sms")
-print("Here is your Tinder token :" + str(getToken(phone_number, sms_code, log_code)))
+print(f"Here is your Tinder token :{str(getToken(phone_number, sms_code, log_code))}")
