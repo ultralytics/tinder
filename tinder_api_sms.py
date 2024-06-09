@@ -30,7 +30,7 @@ def get_updates(last_activity_date=""):
     Format for last_activity_date: "2017-07-09T10:28:13.392Z"
     """
     try:
-        url = config.host + "/updates"
+        url = f"{config.host}/updates"
         r = requests.post(url, headers=headers, data=json.dumps({"last_activity_date": last_activity_date}))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -40,7 +40,7 @@ def get_updates(last_activity_date=""):
 def get_self():
     """Returns your own profile data."""
     try:
-        url = config.host + "/profile"
+        url = f"{config.host}/profile"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -60,7 +60,7 @@ def change_preferences(**kwargs):
     {"photo_optimizer_enabled":false}
     """
     try:
-        url = config.host + "/profile"
+        url = f"{config.host}/profile"
         r = requests.post(url, headers=headers, data=json.dumps(kwargs))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -77,7 +77,7 @@ def get_meta():
     'travel', 'notifications', 'user']
     """
     try:
-        url = config.host + "/meta"
+        url = f"{config.host}/meta"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -90,7 +90,7 @@ def update_location(lat, lon):
     Note: Requires a passport / Tinder Plus
     """
     try:
-        url = config.host + "/passport/user/travel"
+        url = f"{config.host}/passport/user/travel"
         r = requests.post(url, headers=headers, data=json.dumps({"lat": lat, "lon": lon}))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -99,7 +99,7 @@ def update_location(lat, lon):
 
 def reset_real_location():
     try:
-        url = config.host + "/passport/user/reset"
+        url = f"{config.host}/passport/user/reset"
         r = requests.post(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -109,7 +109,7 @@ def reset_real_location():
 def get_recs_v2():
     """This works more consistently then the normal get_recommendations because it seeems to check new location."""
     try:
-        url = config.host + "/v2/recs/core?locale=en-US"
+        url = f"{config.host}/v2/recs/core?locale=en-US"
         r = requests.get(url, headers=headers)
         return r.json()
     except Exception as e:
@@ -121,7 +121,7 @@ def set_webprofileusername(username):
     Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME
     """
     try:
-        url = config.host + "/profile/username"
+        url = f"{config.host}/profile/username"
         r = requests.put(url, headers=headers, data=json.dumps({"username": username}))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -131,7 +131,7 @@ def set_webprofileusername(username):
 def reset_webprofileusername(username):
     """Resets the username for the webprofile."""
     try:
-        url = config.host + "/profile/username"
+        url = f"{config.host}/profile/username"
         r = requests.delete(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -141,7 +141,7 @@ def reset_webprofileusername(username):
 def get_person(id):
     """Gets a user's profile via their id."""
     try:
-        url = config.host + "/user/%s" % id
+        url = f"{config.host}/user/{id}"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -150,7 +150,7 @@ def get_person(id):
 
 def send_msg(match_id, msg):
     try:
-        url = config.host + "/user/matches/%s" % match_id
+        url = f"{config.host}/user/matches/{match_id}"
         r = requests.post(url, headers=headers, data=json.dumps({"message": msg}))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -159,7 +159,7 @@ def send_msg(match_id, msg):
 
 def superlike(person_id):
     try:
-        url = config.host + "/like/%s/super" % person_id
+        url = f"{config.host}/like/{person_id}/super"
         r = requests.post(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -168,7 +168,7 @@ def superlike(person_id):
 
 def like(person_id):
     try:
-        url = config.host + "/like/%s" % person_id
+        url = f"{config.host}/like/{person_id}"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -177,7 +177,7 @@ def like(person_id):
 
 def dislike(person_id):
     try:
-        url = config.host + "/pass/%s" % person_id
+        url = f"{config.host}/pass/{person_id}"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -192,7 +192,7 @@ def report(person_id, cause, explanation=""):
         4 : Inappropriate Photos and no explanation
     """
     try:
-        url = config.host + "/report/%s" % person_id
+        url = f"{config.host}/report/{person_id}"
         r = requests.post(url, headers=headers, data={"cause": cause, "text": explanation})
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -201,7 +201,7 @@ def report(person_id, cause, explanation=""):
 
 def match_info(match_id):
     try:
-        url = config.host + "/matches/%s" % match_id
+        url = f"{config.host}/matches/{match_id}"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -210,7 +210,7 @@ def match_info(match_id):
 
 def all_matches():
     try:
-        url = config.host + "/v2/matches"
+        url = f"{config.host}/v2/matches"
         r = requests.get(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:

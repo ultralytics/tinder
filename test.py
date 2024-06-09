@@ -19,7 +19,7 @@ tinder_api.get_auth_token(fb_access_token, fb_user_id)
 
 # Create user directory
 user_dir = "data/" + features.config.fb_username.split("@")[0] + "/"
-os.system("rm -rf " + user_dir + " && mkdir " + user_dir)
+os.system(f"rm -rf {user_dir} && mkdir {user_dir}")
 print("\nCreated User Directory: " + user_dir)
 
 # Get your profile photos
@@ -41,9 +41,9 @@ match_info = features.get_match_info()
 download_match_images = True
 if download_match_images:
     print("\nDownloading match images...")
-    match_dir = user_dir + "match_images/"
-    yolo_dir = user_dir + "match_images_yolo/"
-    crop_dir = user_dir + "match_images_crop/"
+    match_dir = f"{user_dir}match_images/"
+    yolo_dir = f"{user_dir}match_images_yolo/"
+    crop_dir = f"{user_dir}match_images_crop/"
 
     os.makedirs(match_dir)
     os.makedirs(crop_dir)
@@ -53,8 +53,8 @@ if download_match_images:
         name = match_info[i]["name"]
         photos = match_info[i]["photos"]
         for j, photo in enumerate(photos):
-            label = name + "_m" + str(i) + "_" + str(j)
-            os.system("wget " + photo + " -q -O " + match_dir + label + ".jpg")
+            label = f"{name}_m{str(i)}_{str(j)}"
+            os.system(f"wget {photo} -q -O {match_dir}{label}.jpg")
 
     # Pass images through yolov3
     print("\nAnalyzing match images with YOLOv3...")
@@ -62,13 +62,13 @@ if download_match_images:
     import detect as detect
 
     detect.opt.conf_thres = 0.60
-    detect.opt.image_folder = sys.path[0] + "/" + match_dir
-    detect.opt.output_folder = sys.path[0] + "/" + yolo_dir
+    detect.opt.image_folder = f"{sys.path[0]}/{match_dir}"
+    detect.opt.output_folder = f"{sys.path[0]}/{yolo_dir}"
     detect.opt.txt_out = True
     detect.main(detect.opt)
 
     # Remove images of none or multiple people
-    txt_files = sorted(glob.glob("%s/*.txt" % yolo_dir))
+    txt_files = sorted(glob.glob(f"{yolo_dir}/*.txt"))
     for txt_file in txt_files:
         labels = np.loadtxt(txt_file, dtype=np.float32).reshape(-1, 6)
         labels = labels[labels[:, 4] == 0]
