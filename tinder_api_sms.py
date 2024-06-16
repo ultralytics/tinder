@@ -112,7 +112,7 @@ def get_recs_v2():
         url = f"{config.host}/v2/recs/core?locale=en-US"
         r = requests.get(url, headers=headers)
         return r.json()
-    except Exception as e:
+    except Exception:
         print("excepted")
 
 

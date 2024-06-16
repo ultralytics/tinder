@@ -4,9 +4,6 @@ import random
 from datetime import date, datetime
 from time import sleep
 
-import config
-from tqdm import tqdm
-
 import tinder_api as api
 
 """
