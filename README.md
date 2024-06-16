@@ -94,7 +94,7 @@ Sort your matches by attributes such as "age", "message_count", and "gender". He
 ```javascript
 [
   // Tuple with match ID and corresponding match info.
-]
+];
 ```
 
 #### Friends' Pingtimes (Unavailable)

@@ -4,8 +4,6 @@ import random
 from datetime import date, datetime
 from time import sleep
 
-import config
-from tqdm import tqdm
 
 import tinder_api as api
 
@@ -18,7 +16,7 @@ gender, message count, and their average successRate.
 
 def get_match_info():
     matches = api.get_updates()["matches"]
-    now = datetime.utcnow()
+    datetime.utcnow()
     match_info = {}
     n = len(matches)
     print("\nDownloading match info...", end="")
@@ -148,7 +146,7 @@ def pause():
 
 
 if __name__ == "__main__":
-    if api.authverif() == True:
+    if api.authverif() is True:
         print("Gathering Data on your matches...")
         match_info = get_match_info()
     else:
