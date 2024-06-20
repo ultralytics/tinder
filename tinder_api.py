@@ -14,6 +14,7 @@ headers = {
 
 
 def get_auth_token(fb_auth_token, fb_user_id):
+    """Obtain an authorization token using a Facebook token and user ID."""
     if "error" in fb_auth_token:
         return {"error": "could not retrieve fb_auth_token"}
     if "error" in fb_user_id:
@@ -33,6 +34,7 @@ def get_auth_token(fb_auth_token, fb_user_id):
 
 
 def authverif():
+    """Verifies authentication by checking for an "error" key in the response from get_auth_token()."""
     res = get_auth_token(config.fb_access_token, config.fb_user_id)
     return "error" not in res
 
@@ -122,6 +124,7 @@ def update_location(lat, lon):
 
 
 def reset_real_location():
+    """Resets the user's real location by making a POST request to the server."""
     try:
         url = f"{config.host}/passport/user/reset"
         r = requests.post(url, headers=headers)
@@ -173,6 +176,7 @@ def get_person(id):
 
 
 def send_msg(match_id, msg):
+    """Sends a message to a user match specified by match_id."""
     try:
         url = f"{config.host}/user/matches/{match_id}"
         r = requests.post(url, headers=headers, data=json.dumps({"message": msg}))
@@ -182,6 +186,7 @@ def send_msg(match_id, msg):
 
 
 def superlike(person_id):
+    """Send a superlike to a user identified by person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/like/{person_id}/super"
         r = requests.post(url, headers=headers)
@@ -191,6 +196,7 @@ def superlike(person_id):
 
 
 def like(person_id):
+    """Send a GET request to like a user by their person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/like/{person_id}"
         r = requests.get(url, headers=headers)
@@ -200,6 +206,7 @@ def like(person_id):
 
 
 def dislike(person_id):
+    """Send a GET request to dislike a user identified by person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/pass/{person_id}"
         r = requests.get(url, headers=headers)
@@ -224,6 +231,7 @@ def report(person_id, cause, explanation=""):
 
 
 def match_info(match_id):
+    """Fetch and return match info from the server using the provided match ID."""
     try:
         url = f"{config.host}/matches/{match_id}"
         r = requests.get(url, headers=headers)
@@ -233,6 +241,7 @@ def match_info(match_id):
 
 
 def all_matches():
+    """Fetches all match data from the server."""
     try:
         url = f"{config.host}/v2/matches"
         r = requests.get(url, headers=headers)
@@ -242,6 +251,7 @@ def all_matches():
 
 
 def fast_match_info():
+    """Fetches the fast match count from the server."""
     try:
         url = f"{config.host}/v2/fast-match/preview"
         r = requests.get(url, headers=headers)
@@ -251,6 +261,7 @@ def fast_match_info():
 
 
 def trending_gifs(limit=3):
+    """Fetches trending GIFs from the server with an optional limit on the number of results."""
     try:
         url = f"{config.host}/giphy/trending?limit={limit}"
         r = requests.get(url, headers=headers)
@@ -260,6 +271,7 @@ def trending_gifs(limit=3):
 
 
 def gif_query(query, limit=3):
+    """Query GIFs from Giphy based on a search term and limit the number of results."""
     try:
         url = f"{config.host}/giphy/search?limit={limit}&query={query}"
         r = requests.get(url, headers=headers)

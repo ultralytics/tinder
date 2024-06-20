@@ -12,6 +12,9 @@ HEADERS = {
 
 
 def sendCode(number):
+    """Sends a verification code to the given phone number using a POST request and returns the login request code if
+    successful.
+    """
     URL = CODE_REQUEST_URL.replace("#placeholder", number)
     r = requests.post(URL, headers=HEADERS, verify=False)
     print(r.url)
@@ -23,6 +26,7 @@ def sendCode(number):
 
 
 def getToken(number, code, req_code):
+    """Retrieve and return an API token using phone number, confirmation code, and request code for authentication."""
     VALIDATE_URL = CODE_VALIDATE_URL.replace("#confirmation_code", code)
     VALIDATE_URL = VALIDATE_URL.replace("#phone_number", number)
     VALIDATE_URL = VALIDATE_URL.replace("#request_code", req_code)

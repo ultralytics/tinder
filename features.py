@@ -14,6 +14,7 @@ gender, message count, and their average successRate.
 
 
 def get_match_info():
+    """Collect data on Tinder matches and return detailed information for each match."""
     matches = api.get_updates()["matches"]
     datetime.utcnow()
     match_info = {}
@@ -95,6 +96,7 @@ def sort_by_value(sortType):
 
 
 def see_friends_profiles(name=None):
+    """Retrieve friend profiles, optionally filtered by name, upcasing the first character of each word."""
     friends = api.see_friends()
     if name is None:
         return friends
@@ -104,6 +106,7 @@ def see_friends_profiles(name=None):
 
 
 def convert_from_datetime(difference):
+    """Convert a timedelta object into a human-readable string format 'X days, X hrs XX min XX sec'."""
     secs = difference.seconds
     days = difference.days
     m, s = divmod(secs, 60)
@@ -112,6 +115,9 @@ def convert_from_datetime(difference):
 
 
 def get_last_activity_date(now, ping_time):
+    """Calculate the time difference between current time and last ping time, returning it in a human-readable
+    format.
+    """
     ping_time = ping_time[: len(ping_time) - 5]
     datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S")
     difference = now - datetime_ping
@@ -119,6 +125,9 @@ def get_last_activity_date(now, ping_time):
 
 
 def how_long_has_it_been():
+    """Calculate the time difference between the current time and each person's last activity date in a human-readable
+    format.
+    """
     global match_info
     now = datetime.utcnow()
     times = {}

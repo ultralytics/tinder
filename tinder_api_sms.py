@@ -98,6 +98,7 @@ def update_location(lat, lon):
 
 
 def reset_real_location():
+    """Resets the user's real location by sending a POST request to the server."""
     try:
         url = f"{config.host}/passport/user/reset"
         r = requests.post(url, headers=headers)
@@ -149,6 +150,7 @@ def get_person(id):
 
 
 def send_msg(match_id, msg):
+    """Sends a message to a user match specified by match_id."""
     try:
         url = f"{config.host}/user/matches/{match_id}"
         r = requests.post(url, headers=headers, data=json.dumps({"message": msg}))
@@ -158,6 +160,7 @@ def send_msg(match_id, msg):
 
 
 def superlike(person_id):
+    """Send a superlike to a user identified by person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/like/{person_id}/super"
         r = requests.post(url, headers=headers)
@@ -167,6 +170,7 @@ def superlike(person_id):
 
 
 def like(person_id):
+    """Send a GET request to like a user identified by person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/like/{person_id}"
         r = requests.get(url, headers=headers)
@@ -176,6 +180,7 @@ def like(person_id):
 
 
 def dislike(person_id):
+    """Send a 'dislike' request to the server for the provided person_id and return the server's JSON response."""
     try:
         url = f"{config.host}/pass/{person_id}"
         r = requests.get(url, headers=headers)
@@ -200,6 +205,7 @@ def report(person_id, cause, explanation=""):
 
 
 def match_info(match_id):
+    """Fetch and return match info from the server using the provided match ID."""
     try:
         url = f"{config.host}/matches/{match_id}"
         r = requests.get(url, headers=headers)
@@ -209,6 +215,7 @@ def match_info(match_id):
 
 
 def all_matches():
+    """Fetches all match data from the server."""
     try:
         url = f"{config.host}/v2/matches"
         r = requests.get(url, headers=headers)
