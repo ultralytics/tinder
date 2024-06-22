@@ -3,13 +3,12 @@ import os
 import sys
 
 import cv2
+import features
 import matplotlib.pyplot as plt
 import numpy as np
+import tinder_api
 from skimage import io
 from tqdm import tqdm
-
-import features
-import tinder_api
 
 # Get tokens
 host = "https://api.gotinder.com"  # thanks to this line you do not need to import config.py or tinder_config_ex.py
