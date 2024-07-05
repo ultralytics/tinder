@@ -31,6 +31,5 @@ def get_fb_id(access_token):
     """Fetch the Facebook user ID using the provided access token by sending a request to the Graph API."""
     if "error" in access_token:
         return {"error": "access token could not be retrieved"}
-    """Gets facebook ID from access token"""
     req = requests.get(f"https://graph.facebook.com/me?access_token={access_token}")
     return req.json()["id"]
