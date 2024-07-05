@@ -28,6 +28,7 @@ def get_fb_access_token(email, password):
 
 
 def get_fb_id(access_token):
+    """Fetch the Facebook user ID using the provided access token by sending a request to the Graph API."""
     if "error" in access_token:
         return {"error": "access token could not be retrieved"}
     """Gets facebook ID from access token"""
