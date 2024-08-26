@@ -57,7 +57,7 @@ def change_preferences(**kwargs):
     gender: 0 == seeking males, 1 == seeking females
     distance_filter: 1..100
     discoverable: true | false
-    {"photo_optimizer_enabled":false}
+    {"photo_optimizer_enabled":false}.
     """
     try:
         url = f"{config.host}/profile"
@@ -87,7 +87,7 @@ def get_meta():
 def update_location(lat, lon):
     """
     Updates your location to the given float inputs
-    Note: Requires a passport / Tinder Plus
+    Note: Requires a passport / Tinder Plus.
     """
     try:
         url = f"{config.host}/passport/user/travel"
@@ -118,9 +118,7 @@ def get_recs_v2():
 
 
 def set_webprofileusername(username):
-    """
-    Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME
-    """
+    """Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME."""
     try:
         url = f"{config.host}/profile/username"
         r = requests.put(url, headers=headers, data=json.dumps({"username": username}))
@@ -194,7 +192,7 @@ def report(person_id, cause, explanation=""):
     There are three options for cause:
         0 : Other and requires an explanation
         1 : Feels like spam and no explanation
-        4 : Inappropriate Photos and no explanation
+        4 : Inappropriate Photos and no explanation.
     """
     try:
         url = f"{config.host}/report/{person_id}"

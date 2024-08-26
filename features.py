@@ -65,7 +65,7 @@ def get_photos(person):
 
 
 def calculate_age(birthday_string):
-    """Converts from '1997-03-25T22:49:41.151Z' to an integer (age)"""
+    """Converts from '1997-03-25T22:49:41.151Z' to an integer (age)."""
     birthyear = int(birthday_string[:4])
     birthmonth = int(birthday_string[5:7])
     birthday = int(birthday_string[8:10])
@@ -89,7 +89,7 @@ def get_avg_successRate(person):
 def sort_by_value(sortType):
     """
     Sort options are:
-        'age', 'message_count', 'gender'
+        'age', 'message_count', 'gender'.
     """
     global match_info
     return sorted(match_info.items(), key=lambda x: x[1][sortType], reverse=True)
