@@ -1,4 +1,3 @@
-# coding=utf-8
 
 import random
 from datetime import date, datetime
@@ -45,7 +44,7 @@ def get_match_info():
             message = template.format(type(ex).__name__, ex.args)
             print(message)
             # continue
-    print(" %g matches... Done." % n)
+    print(f" {n:g} matches... Done.")
     return match_info
 
 
@@ -149,7 +148,7 @@ def pause():
     suspicious!
     """
     nap_length = 3 * random.random()
-    print("Napping for %f seconds..." % nap_length)
+    print(f"Napping for {nap_length:f} seconds...")
     sleep(nap_length)
 
 
