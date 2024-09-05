@@ -1,4 +1,3 @@
-
 import random
 from datetime import date, datetime
 from time import sleep
