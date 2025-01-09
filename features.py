@@ -50,8 +50,11 @@ def get_match_info():
 def get_match_id_by_name(name):
     """Returns a list_of_ids that have the same name as your input."""
     global match_info
-    list_of_ids = [match_info[match]["match_id"] for match in match_info if match_info[match]["name"] == name]
-    if list_of_ids:
+    if list_of_ids := [
+        match_info[match]["match_id"]
+        for match in match_info
+        if match_info[match]["name"] == name
+    ]:
         return list_of_ids
     return {"error": f"No matches by name of {name}"}
 
