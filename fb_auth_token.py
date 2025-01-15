@@ -1,3 +1,5 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
 # Used from  https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py
 
 import re
