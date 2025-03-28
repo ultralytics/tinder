@@ -2,7 +2,7 @@
 
 # Tinder API Documentation (Updated 2018) 💘
 
-A big thank you to [@rtt](https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md) for their initial compilation of the Tinder API documentation. This document is meant to offer an updated guide for interacting with the Tinder API as of June 2018. While this guide provides a snapshot from that time, remember that APIs evolve. For current development, always consult the latest official [API documentation](https://developer.match.com/) if available, or use network inspection tools to understand current endpoints.
+A big thank you to [@rtt](https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md) for their initial compilation of the Tinder API documentation. This document is meant to offer an updated guide for interacting with the Tinder API as of June 2018. While this guide provides a snapshot from that time, remember that APIs evolve. For current development, always consult the latest official API documentation if available, or use network inspection tools to understand current endpoints.
 
 [![Ultralytics Actions](https://github.com/ultralytics/tinder/actions/workflows/format.yml/badge.svg)](https://github.com/ultralytics/tinder/actions/workflows/format.yml)
 [![Ultralytics Discord](https://img.shields.io/discord/1089800235347353640?logo=discord&logoColor=white&label=Discord&color=blue)](https://discord.com/invite/ultralytics)
