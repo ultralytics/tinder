@@ -86,9 +86,7 @@ def get_avg_successRate(person):
 
 
 def sort_by_value(sortType):
-    """
-    Sort options are:
-        'age', 'message_count', 'gender'.
+    """Sort options are: 'age', 'message_count', 'gender'.
     """
     global match_info
     return sorted(match_info.items(), key=lambda x: x[1][sortType], reverse=True)
@@ -114,8 +112,7 @@ def convert_from_datetime(difference):
 
 
 def get_last_activity_date(now, ping_time):
-    """Calculate the time difference between current time and last ping time, returning it in a human-readable
-    format.
+    """Calculate the time difference between current time and last ping time, returning it in a human-readable format.
     """
     ping_time = ping_time[: len(ping_time) - 5]
     datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S")
@@ -140,12 +137,10 @@ def how_long_has_it_been():
 
 
 def pause():
-    """
-    In order to appear as a real Tinder user using the app...
+    """In order to appear as a real Tinder user using the app...
 
-    When making many API calls, it is important to pause a...
-    realistic amount of time between actions to not make Tinder...
-    suspicious!
+    When making many API calls, it is important to pause a... realistic amount of time between actions to not make
+    Tinder... suspicious!
     """
     nap_length = 3 * random.random()
     print(f"Napping for {nap_length:f} seconds...")
