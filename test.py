@@ -55,7 +55,7 @@ if download_match_images:
         name = match_info[i]["name"]
         photos = match_info[i]["photos"]
         for j, photo in enumerate(photos):
-            label = f"{name}_m{str(i)}_{str(j)}"
+            label = f"{name}_m{i!s}_{j!s}"
             os.system(f"wget {photo} -q -O {match_dir}{label}.jpg")
 
     # Pass images through yolov3

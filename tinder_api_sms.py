@@ -24,11 +24,10 @@ def get_recommendations():
 
 
 def get_updates(last_activity_date=""):
-    """
-    Returns all updates since the given activity date.
+    """Returns all updates since the given activity date.
 
-    The last activity date is defaulted at the beginning of time.
-    Format for last_activity_date: "2017-07-09T10:28:13.392Z"
+    The last activity date is defaulted at the beginning of time. Format for last_activity_date:
+    "2017-07-09T10:28:13.392Z"
     """
     try:
         url = f"{config.host}/updates"
@@ -49,16 +48,10 @@ def get_self():
 
 
 def change_preferences(**kwargs):
-    """
-    ex: change_preferences(age_filter_min=30, gender=0)
-    kwargs: a dictionary - whose keys become separate keyword arguments and the values become values of these arguments
-    age_filter_min: 18..46
-    age_filter_max: 22..55
-    age_filter_min <= age_filter_max - 4
-    gender: 0 == seeking males, 1 == seeking females
-    distance_filter: 1..100
-    discoverable: true | false
-    {"photo_optimizer_enabled":false}.
+    """ex: change_preferences(age_filter_min=30, gender=0) kwargs: a dictionary - whose keys become separate keyword
+    arguments and the values become values of these arguments age_filter_min: 18..46 age_filter_max: 22..55
+    age_filter_min <= age_filter_max - 4 gender: 0 == seeking males, 1 == seeking females distance_filter: 1..100
+    discoverable: true | false {"photo_optimizer_enabled":false}.
     """
     try:
         url = f"{config.host}/profile"
@@ -69,13 +62,10 @@ def change_preferences(**kwargs):
 
 
 def get_meta():
-    """
-    Returns meta data on yourself.
+    """Returns meta data on yourself.
 
-    Including the following keys:
-    ['globals', 'client_resources', 'versions', 'purchases',
-    'status', 'groups', 'products', 'rating', 'tutorials',
-    'travel', 'notifications', 'user']
+    Including the following keys: ['globals', 'client_resources', 'versions', 'purchases', 'status', 'groups',
+    'products', 'rating', 'tutorials', 'travel', 'notifications', 'user']
     """
     try:
         url = f"{config.host}/meta"
@@ -86,10 +76,7 @@ def get_meta():
 
 
 def update_location(lat, lon):
-    """
-    Updates your location to the given float inputs
-    Note: Requires a passport / Tinder Plus.
-    """
+    """Updates your location to the given float inputs Note: Requires a passport / Tinder Plus."""
     try:
         url = f"{config.host}/passport/user/travel"
         r = requests.post(url, headers=headers, data=json.dumps({"lat": lat, "lon": lon}))
@@ -189,11 +176,8 @@ def dislike(person_id):
 
 
 def report(person_id, cause, explanation=""):
-    """
-    There are three options for cause:
-        0 : Other and requires an explanation
-        1 : Feels like spam and no explanation
-        4 : Inappropriate Photos and no explanation.
+    """There are three options for cause: 0 : Other and requires an explanation 1 : Feels like spam and no explanation 4
+    : Inappropriate Photos and no explanation.
     """
     try:
         url = f"{config.host}/report/{person_id}"
