@@ -86,8 +86,7 @@ def get_avg_successRate(person):
 
 
 def sort_by_value(sortType):
-    """Sort options are: 'age', 'message_count', 'gender'.
-    """
+    """Sort options are: 'age', 'message_count', 'gender'."""
     global match_info
     return sorted(match_info.items(), key=lambda x: x[1][sortType], reverse=True)
 

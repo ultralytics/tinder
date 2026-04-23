@@ -76,8 +76,7 @@ def get_meta():
 
 
 def update_location(lat, lon):
-    """Updates your location to the given float inputs Note: Requires a passport / Tinder Plus.
-    """
+    """Updates your location to the given float inputs Note: Requires a passport / Tinder Plus."""
     try:
         url = f"{config.host}/passport/user/travel"
         r = requests.post(url, headers=headers, data=json.dumps({"lat": lat, "lon": lon}))
