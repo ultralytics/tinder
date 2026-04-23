@@ -19,7 +19,7 @@ def sendCode(number):
     """
     URL = CODE_REQUEST_URL.replace("#placeholder", number)
     r = requests.post(URL, headers=HEADERS, verify=False)
-    print(r.url)
+    print("Verification request sent.")
     response = r.json()
     if response.get("login_request_code") is None:
         return False
@@ -52,4 +52,8 @@ def getToken(number, code, req_code):
 phone_number = input("Please enter your phone number under the international format (country code + number)")
 log_code = sendCode(phone_number)
 sms_code = input("Please enter the code you've received by sms")
-print(f"Here is your Tinder token :{str(getToken(phone_number, sms_code, log_code))}")
+token = getToken(phone_number, sms_code, log_code)
+if token:
+    print("Tinder token retrieved successfully.")
+else:
+    print("Tinder token retrieval failed.")
