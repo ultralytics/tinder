@@ -111,8 +111,7 @@ def convert_from_datetime(difference):
 
 
 def get_last_activity_date(now, ping_time):
-    """Calculate the time difference between current time and last ping time, returning it in a human-readable format.
-    """
+    """Calculate the time difference between current time and last ping time, returning it in a human-readable format."""
     ping_time = ping_time[: len(ping_time) - 5]
     datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S")
     difference = now - datetime_ping
