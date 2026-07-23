@@ -61,7 +61,7 @@ if download_match_images:
     # Pass images through yolov3
     print("\nAnalyzing match images with YOLOv3...")
     sys.path.append("../yolov3")
-    import detect as detect
+    import detect
 
     detect.opt.conf_thres = 0.60
     detect.opt.image_folder = f"{sys.path[0]}/{match_dir}"
@@ -85,7 +85,7 @@ if download_match_images:
                 img = cv2.imread(match_dir + img_name)
                 cv2.imwrite(crop_dir + img_name, img[box[1] : box[3], box[0] : box[2]])
 
-exit()
+sys.exit()
 
 # Get Tinder Recommendations of people around you
 # recommendations = tinder_api.get_recommendations()
