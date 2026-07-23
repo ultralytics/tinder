@@ -51,8 +51,8 @@ def change_preferences(**kwargs):
     """Change profile preferences using keyword arguments.
 
     Valid ranges include age_filter_min 18..46, age_filter_max 22..55, gender 0 or 1, and distance_filter 1..100. The
-    minimum age must be at least four years below the maximum age. The discoverable and photo_optimizer_enabled
-    options accept boolean values.
+    minimum age must be at least four years below the maximum age. The discoverable and photo_optimizer_enabled options
+    accept boolean values.
     """
     try:
         url = f"{config.host}/profile"
