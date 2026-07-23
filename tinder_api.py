@@ -74,10 +74,10 @@ def get_self():
 
 
 def change_preferences(**kwargs):
-    """ex: change_preferences(age_filter_min=30, gender=0) kwargs: a dictionary - whose keys become separate keyword
-    arguments and the values become values of these arguments age_filter_min: 18..46 age_filter_max: 22..55
-    age_filter_min <= age_filter_max - 4 gender: 0 == seeking males, 1 == seeking females distance_filter: 1..100
-    discoverable: true | false {"photo_optimizer_enabled":false}.
+    """Change profile preferences using keyword arguments.
+
+    Valid ranges include age_filter_min 18..46, age_filter_max 22..55, gender 0 or 1, and distance_filter 1..100.
+    The minimum age must be at least four years below the maximum age.
     """
     try:
         url = f"{config.host}/profile"
@@ -122,7 +122,7 @@ def reset_real_location():
 
 
 def get_recs_v2():
-    """This works more consistently then the normal get_recommendations because it seeems to check new location."""
+    """Get recommendations while accounting for a newly selected location."""
     try:
         url = f"{config.host}/v2/recs/core?locale=en-US"
         r = requests.get(url, headers=headers)

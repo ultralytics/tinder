@@ -1,7 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import random
-from datetime import date, datetime
+from datetime import datetime, timezone
 from time import sleep
 
 import tinder_api as api
@@ -16,7 +16,6 @@ gender, message count, and their average successRate.
 def get_match_info():
     """Collect data on Tinder matches and return detailed information for each match."""
     matches = api.get_updates()["matches"]
-    datetime.utcnow()
     match_info = {}
     n = len(matches)
     print("\nDownloading match info...", end="")
@@ -51,7 +50,6 @@ def get_match_info():
 
 def get_match_id_by_name(name):
     """Returns a list_of_ids that have the same name as your input."""
-    global match_info
     if list_of_ids := [match_info[match]["match_id"] for match in match_info if match_info[match]["name"] == name]:
         return list_of_ids
     return {"error": f"No matches by name of {name}"}
@@ -68,7 +66,7 @@ def calculate_age(birthday_string):
     birthyear = int(birthday_string[:4])
     birthmonth = int(birthday_string[5:7])
     birthday = int(birthday_string[8:10])
-    today = date.today()
+    today = datetime.now().astimezone().date()
     return today.year - birthyear - ((today.month, today.day) < (birthmonth, birthday))
 
 
@@ -87,7 +85,6 @@ def get_avg_successRate(person):
 
 def sort_by_value(sortType):
     """Sort options are: 'age', 'message_count', 'gender'."""
-    global match_info
     return sorted(match_info.items(), key=lambda x: x[1][sortType], reverse=True)
 
 
@@ -107,13 +104,13 @@ def convert_from_datetime(difference):
     days = difference.days
     m, s = divmod(secs, 60)
     h, m = divmod(m, 60)
-    return "%d days, %d hrs %02d min %02d sec" % (days, h, m, s)
+    return f"{days:d} days, {h:d} hrs {m:02d} min {s:02d} sec"
 
 
 def get_last_activity_date(now, ping_time):
     """Calculate the time difference between current time and last ping time, returning it in a human-readable format."""
     ping_time = ping_time[: len(ping_time) - 5]
-    datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S")
+    datetime_ping = datetime.strptime(ping_time, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
     difference = now - datetime_ping
     return convert_from_datetime(difference)
 
@@ -122,8 +119,7 @@ def how_long_has_it_been():
     """Calculate the time difference between the current time and each person's last activity date in a human-readable
     format.
     """
-    global match_info
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     times = {}
     for person in match_info:
         name = match_info[person]["name"]

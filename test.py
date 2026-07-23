@@ -97,7 +97,6 @@ print(testid)
 
 # Retrieve profile from id
 testperson = tinder_api.get_person(testid)
-testperson
 
 # Like a user
 # tinder_api.like('5a10ae3c8802dc4401463712')
