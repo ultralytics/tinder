@@ -105,25 +105,25 @@ The `friends_pingtimes()` function used to return the time since each Facebook f
 
 This feature used to allow you to access profile information and ID of your Facebook friends on Tinder. With the ID, you could call `api.get_person(id)` to get more detailed information. This feature is no longer available.
 
-# 🤝 Contribute
+## 💡 Contribute
 
 We welcome contributions from the community! Whether you're fixing bugs, adding new features, or improving documentation, your input is invaluable. Take a look at our [Contributing Guide](https://docs.ultralytics.com/help/contributing/) to get started. Also, we'd love to hear about your experience with Ultralytics products. Please consider filling out our [Survey](https://www.ultralytics.com/survey?utm_source=github&utm_medium=social&utm_campaign=Survey). A huge 🙏 and thank you to all of our contributors!
 
 <!-- Ultralytics contributors -->
 
-<a href="https://github.com/ultralytics/tinder/graphs/contributors">
+<a href="https://github.com/ultralytics/ultralytics/graphs/contributors">
 <img width="100%" src="https://github.com/ultralytics/assets/raw/main/im/image-contributors.png" alt="Ultralytics open-source contributors"></a>
 
-# ©️ License
+## 📄 License
 
 Ultralytics is excited to offer two different licensing options to meet your needs:
 
 - **AGPL-3.0 License**: Perfect for students and hobbyists, this [OSI-approved](https://opensource.org/license/agpl-v3) open-source license encourages collaborative learning and knowledge sharing. Please refer to the [LICENSE](https://github.com/ultralytics/tinder/blob/main/LICENSE) file for detailed terms.
 - **Enterprise License**: Ideal for commercial use, this license allows for the integration of Ultralytics software and AI models into commercial products without the open-source requirements of AGPL-3.0. For use cases that involve commercial applications, please contact us via [Ultralytics Licensing](https://www.ultralytics.com/license).
 
-# 📬 Contact Us
+## 📮 Contact
 
-For bug reports, feature requests, and contributions, head to [GitHub Issues](https://github.com/ultralytics/tinder/issues). For questions and discussions about this project and other Ultralytics endeavors, join us on [Discord](https://discord.com/invite/ultralytics)!
+For bug reports, feature requests, and contributions, head to [GitHub Issues](https://github.com/ultralytics/ultralytics/issues). For questions and discussions about this project and other Ultralytics endeavors, join us on [Discord](https://discord.com/invite/ultralytics)!
 
 <br>
 <div align="center">
