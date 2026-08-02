@@ -34,7 +34,7 @@ After opening a PR:
 pip3 install -U -r requirements.txt # opencv-python, matplotlib, numpy, requests, scikit-image, tqdm, robobrowser
 ```
 
-There is no test suite and no CI beyond `.github/workflows/format.yml` (Ruff, docformatter, Prettier, codespell auto-applied to PR branches) and `cla.yml`. Every script needs a local `config.py` that the repository does not ship and `.gitignore` deliberately excludes — it must define `host` plus the credentials each module reads (`fb_access_token` and `fb_user_id` for `tinder_api.py`, `tinder_token` for `tinder_api_sms.py`). Nothing here runs on a clean checkout, and none of it should be validated against the live service.
+There is no test suite and no CI beyond `.github/workflows/format.yml` (Ruff, docformatter, Prettier, codespell auto-applied to PR branches) and `cla.yml`. The two API clients — and therefore `features.py` and `test.py`, which import them — need a local `config.py` that the repository does not ship and `.gitignore` deliberately excludes. It must define `host` plus the credentials the client reads: `fb_access_token` and `fb_user_id` for `tinder_api.py`, `tinder_token` for `tinder_api_sms.py`. Only the two token-acquisition scripts, `fb_auth_token.py` and `phone_auth_token.py`, import nothing from `config`. None of it should be validated against the live service.
 
 ## Architecture
 

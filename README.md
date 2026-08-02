@@ -70,7 +70,7 @@ To authenticate using your Facebook account, include your Facebook username and 
 
 SMS authentication is straightforward. Run `phone_auth_token.py` and input your phone number when prompted. Enter the code you receive via SMS to retrieve your token. Keep in mind that there is a rate limit for the number of SMS you can receive in an hour. It's advised to use your token within its lifetime (24 hours) instead of requesting a new one each time.
 
-To proceed, add your token to a local `config.py` as the value for `tinder_token`. You're now prepared to start using the API!
+To proceed, create a local `config.py` with `host = "https://api.gotinder.com"` and your token as the value for `tinder_token`. You're now prepared to start using the API!
 
 ## Key Features
 
